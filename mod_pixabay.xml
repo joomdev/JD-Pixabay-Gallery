@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1" client="site" method="upgrade">
+	<name>JD Pixabay Gallery</name>
+	<creationDate>October 2013</creationDate>
+	<version>1.1.0</version>
+	<author>JoomDev (Formerly GraphicAholic)</author>
+	<copyright>Copyright (C) 2020 Joomdev, Inc. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<authorEmail>info@joomdev.com</authorEmail>
+	<authorUrl>https://www.joomdev.com</authorUrl>
+	
+	<description>
+	<![CDATA[
+		<div class="alert alert-info" style="font-weight: normal;">
+			<img src="../modules/mod_pixabay/images/pixabaylogo.png" alt="JD Pixabay Gallery"/>
+			<h3>JD Pixabay Gallery</h3>
+			<p>JD Pixabay Gallery is a Joomla module that allows you to display photos from a specific Pixabay user account or on the tag basis or on your search term basis.</p>
+			<p>JD Pixabay  formerly known as Pixabay Gallery from Graphicaholic is now moved to JoomDev along with other Extensions. <strong>Check out the <a href="https://www.joomdev.com/graphicaholic" target="_blank">Announcement here.</a></strong></p>
+			<a href="https://www.joomdev.com/forum/jdajd-pixabay-gallerygechecker" target="_blank">Support</a> | <span>Demo</span> | <a href="https://www.joomdev.com/products/extensions/jd-pixabay-gallery" target="_blank">More Details</a>
+		</div>
+	]]>
+	</description>
+	
+	<files>
+		<filename module="mod_pixabay">mod_pixabay.php</filename>
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>images</folder>
+		<folder>tmpl</folder>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_pixabay.xml</filename>
+	</files>
+
+	<updateservers>
+		<server type="extension" priority="1" name="JD Pixabay Gallery">https://joomdev.com/updates/pixabaygallery.xml</server>
+	</updateservers>
+
+	<config>
+		<fields name="params">
+			<!-- General Settings -->
+			<fieldset name="general" group="general" label="General Settings">
+				<field name="addScript" type="list" default="1" label="Include Scripts" description="This option only needs to be loaded once on a single page. If displaying more then one JD Pixabay Gallery, set this option to Yes in only one of your module displays. It is not a deal breaker if all of your Pixabay galleries on a single page have this setting to Yes... it just slows down your single page load slightly.">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+
+				<field name="apiKey" type="text" default="909290-fe7f236cc23a0202bde748bdb" label="Enter YOUR Pixabay API key" description="This provided API Key will expire at some point in time. To get your own, create a Pixabay account at www.pixabay.com or login with your Pixabay site creditionals. Go to the very bottom of the landing page and click onto their API menu option. This will take you to the Pixabay API Documentation page and you will find your API key highlighted in GREEN. Copy and paste it here." />
+
+				<field name="selectSource" type="list" default="1" label="Render photos from" description="">
+					<option value="1">Pixabay user name</option>
+					<option value="2">Search tags</option>
+				</field>
+
+				<field name="data-user" type="text" showon="selectSource:1" default="" label="Display specific Pixabay user" description="Enter Pixabay user name." />
+
+				<field name="data-search" type="text" showon="selectSource:2" default="" label="Pixabay search tags" description="A string to search for. Maximum length: 100 characters. Omit to select all images. i.e. africa animals" />
+
+				<field name="data-editors-choice" type="list" default="false" label="Editor Choice photos only" description="Select images that have received an Editor's Choice award.">
+					<option value="false">No</option>
+					<option value="true">Yes</option>
+				</field>
+
+				<field name="data-max-rows" type="text" default="10" label="Data Max Rows" description="Maximum number of rows to display. Images exceeding this row are hidden." />
+
+				<field name="data-target" type="list" default="_blank" label="Display on mouse click in" description="How to show photos on mouse click">
+					<option value="_blank">New Window</option>
+					<option value="_self">Same Window</option>
+				</field>
+
+				<field name="data-per-page" type="text" default="100" label="Data Per Page" description="Maximum number of images per next/prev page. Values: 3-100." />
+
+				<field name="data-row-height" type="text" default="170" label="Data Row Height" description="Maximum height of a row in pixels. Values 30-180." />
+
+				<field name="data-order" type="list" default="latest" label="Data Order" description="How the results should be ordered.">
+					<option value="latest">Sort by latest</option>
+					<option value="popular">Sort by popular</option>
+				</field>
+
+				<field name="data-lang" type="list" default="en" label="Data language" description="The language to search in.">
+					<option value="en">English</option>
+					<option value="fr">French</option>
+					<option value="bg">Bulgarian</option>
+					<option value="cs">Czech</option>
+					<option value="da">Danish</option>
+					<option value="de">German</option>
+					<option value="el">Greek</option>
+					<option value="es">Spanish</option>
+					<option value="fi">Finnish</option>
+					<option value="hu">Hungarian</option>
+					<option value="id">Indonesian</option>
+					<option value="it">Italian</option>
+					<option value="ja">Japanese</option>
+					<option value="ko">Korean</option>
+					<option value="no">Norwegian</option>
+					<option value="pl">Polish</option>
+					<option value="pt">Portuguese</option>
+					<option value="ro">Romanian</option>
+					<option value="ru">Russian</option>
+					<option value="sk">Slovak</option>
+					<option value="sv">Swedish</option>
+					<option value="th">Thai</option>
+					<option value="tr">Turkish</option>
+					<option value="vi">Vietnamese</option>
+				</field>
+
+				<field name="data-image-type" type="list" default="photo" label="Data Image Type" description="A media type to search within.">
+					<option value="all">All</option>
+					<option value="photo">Photo only</option>
+					<option value="illustration">Illustration only</option>
+				</field>
+
+				<field name="data-safesearch" type="list" default="false" label="Data Safe Search" description="A flag indicating that only images suitable for all ages should be returned.">
+					<option value="false">No</option>
+					<option value="true">Yes</option>
+				</field>
+
+				<field name="data-truncate" type="list" default="false" label="Data truncate" description="Hide incomplete last row of images.">
+					<option value="false">No</option>
+					<option value="true">Yes</option>
+				</field>
+
+				<field name="data-navpos" type="list" default="null" label="Data Nav Position" description="Position of pagination links and branding.">
+					<option value="null">Don't display</option>
+					<option value="top">Top Position</option>
+					<option value="bottom">Bottom Position</option>
+				</field>
+
+				<field name="data-branding" type="list" default="false" label="Gallery branding" description="Whether to show Powered by Pixabay.">
+					<option value="false">No</option>
+					<option value="true">Yes</option>
+				</field>
+
+				<field name="data-branding-text" showon="data-branding:true" type="text" filter="raw" default="Powered by" label="Gallery branding prefix" description="Text to show before your link." />
+				<field name="data-branding-text-link" showon="data-branding:true" type="text" filter="raw" default="https://www.pixabay.com" label="Gallery branding link" description="Absolute web address." />
+				<field name="data-branding-text-sufx" showon="data-branding:true" type="text" filter="raw" default="Pixabay" label="Gallery branding link text" description="Text to show for the link." />
+				<field name="data-prev" type="text" filter="raw" default="◄ PREV" label="Data Prev text" description="Text for the previous link. Enter an empty SPACEBAR for no display." />
+				<field name="data-next" type="text" filter="raw" default="NEXT ►" label="Data Next text" description="Text for the next link. Enter an empty SPACEBAR for no display." />
+			</fieldset>
+
+			<fieldset name="custom" group="custom" label="Custom text">
+				<field name="preText" type="textarea" filter="raw" default="" label="Custom text above gallery" description="Supports basic HTML tags." class="span4" rows="20" />
+				<field name="postText" type="textarea" filter="raw" default="" label="Custom text below gallery" description="Supports basic HTML tags." class="span4" rows="20" />
+			</fieldset>
+
+			<!-- Advanced Settings -->
+			<fieldset name="advanced" group="advanced">
+				<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="fieldMODULECLASSSUFFIX" />
+
+				<field name="cache" type="radio" class="btn-group" default="1" label="Caching" description="Select whether to cache the content of this module">
+					<option value="1">Use global</option>
+					<option value="0">No caching</option>
+				</field>
+
+				<field name="cache_time" type="text" default="900" label="Cache Time" description="The time before the module is recached" />
+				<field name="documentation" type="docs" default="900" label="" description="" />
+
+			</fieldset>
+		</fields>
+	</config>
+</extension>
